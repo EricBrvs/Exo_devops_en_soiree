@@ -11,7 +11,7 @@ pipeline {
 
         stage('Run unit Tests') {
             steps {
-                // Je peux faire ici tous mes tests
+                // Lancer les tests unitaires ou autres vérifications
                 sh '''
                 if grep -q "<h1>" page_web.html; then
                     echo "HTML tests PASSED"; 
@@ -19,6 +19,13 @@ pipeline {
                     echo "HTML test FAILED";
                 fi 
                 '''
+            }
+        }
+        
+        stage('Deploy instance') {
+            steps {
+                echo "Deploying application"  // Assure-toi que 'echo' est dans un bloc 'steps'
+                // Autres commandes de déploiement peuvent être ajoutées ici
             }
         }
     }
