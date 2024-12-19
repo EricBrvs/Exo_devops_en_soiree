@@ -1,6 +1,6 @@
 pipeline {
     agent any
-    stages{
+    stages {
         stage ("Checkout code") {
             steps {
                 //recuperer le code depuis git 
@@ -8,14 +8,16 @@ pipeline {
             }
         }
         stage ("Run unit Tests") {
-            //je peux faire ici tous mes tests
-            sh '''
-            if grep -q "<h1>" page_web.html; then
-                echo "HTML tests PASSED"; 
-            else
-                echo "HTML test FAILED";
-            fi 
-            ''' 
+            steps {
+                //je peux faire ici tous mes tests
+                sh '''
+                if grep -q "<h1>" page_web.html; then
+                    echo "HTML tests PASSED"; 
+                else
+                    echo "HTML test FAILED";
+                fi 
+                '''
+            } 
         }
     }
 }
