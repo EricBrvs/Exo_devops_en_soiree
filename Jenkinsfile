@@ -9,7 +9,7 @@ pipeline {
         // Étape 1 : Vérifier le code source
         stage('Checkout') {
             steps {
-                git branch: 'main', url: 'https://github.com/ton-utilisateur/mon-depot.git'
+                git branch: 'main', url: 'https://github.com/EricBrvs/Exo_devops_en_soiree'
             }
         }
 
@@ -39,6 +39,15 @@ pipeline {
                 script {
                     // Tu peux ici ajouter des tests pour vérifier si ton application est en ligne
                     sh 'curl http://localhost:8080'
+                }
+            }
+        }
+
+        // Étape 5 : Nettoyer les conteneurs Docker après le pipeline
+        stage('Cleanup') {
+            steps {
+                script {
+                    sh 'docker stop webapp-container || true && docker rm webapp-container || true'
                 }
             }
         }
