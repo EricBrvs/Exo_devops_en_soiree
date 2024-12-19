@@ -1,15 +1,17 @@
 pipeline {
     agent any
+
     stages {
-        stage ("Checkout code") {
+        stage('Checkout code') {
             steps {
-                //recuperer le code depuis git 
+                // Récupérer le code depuis Git
                 git branch: 'main', url: "https://github.com/EricBrvs/Exo_devops_en_soiree"
             }
         }
-        stage ("Run unit Tests") {
+
+        stage('Run unit Tests') {
             steps {
-                //je peux faire ici tous mes tests
+                // Je peux faire ici tous mes tests
                 sh '''
                 if grep -q "<h1>" page_web.html; then
                     echo "HTML tests PASSED"; 
@@ -17,7 +19,7 @@ pipeline {
                     echo "HTML test FAILED";
                 fi 
                 '''
-            } 
+            }
         }
     }
 }
