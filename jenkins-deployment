@@ -1,0 +1,26 @@
+pipeline {
+    agent any
+    stages {
+        stage ('Checkout code') {
+            steps {
+                //recuperer le code 
+                git branch: 'main', url:'https://github.com/EricBrvs/Exo_devops_en_soiree'
+            }
+        }
+        stage ('Build docker image') {
+            steps {
+                //construire l'image
+                sh 'docker build -t webapp-apache .'
+            }
+        }
+        stage ('Provision isntance') {
+            steps {
+                //lancer un container apache
+                sh 'docker run -d -p 8080:80 --name webapp-container webapp-apache'
+            }
+        }
+        stage ('Deploy instance') {
+            echo 'Application successfully deployed on http://localhost:8080'
+        }
+    }
+}
